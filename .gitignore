@@ -1,0 +1,14 @@
+# Build artifacts
+/target
+
+# IDE: IntelliJ
+*.iml
+.idea/
+
+# Secret configs
+db_cert.pem
+statistics_collector.toml
+
+# Moved binaries
+/statistics-collector
+/statistics-collector.exe
