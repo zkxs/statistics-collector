@@ -121,22 +121,6 @@ async fn main() {
         .and(warp::get())
         .map(|| format!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")));
 
-    // never distributed: safe to delete
-    // original version
-    // /stats/v1/<item_name>/<item_id>/<user_id>/<session_id>/<world_id>/<cache_nonce>/a.png
-    let stats_v1 = warp::path!("stats" / "v1" / String / String / String / String / String / String / "a.png")
-        .and(warp::get())
-        .and(with_state(db_state.clone()))
-        .and_then(stats_v1_handler);
-
-    // never used: safe to delete
-    // failed experiment in collecting less data
-    // /stats/v2/<item_name>/<item_id>/<user_id>/<cache_nonce>/a.png
-    let stats_v2 = warp::path!("stats" / "v2" / String / String / String / String / "a.png")
-        .and(warp::get())
-        .and(with_state(db_state.clone()))
-        .and_then(stats_v2_handler);
-
     // possibly in use
     // switches from path to query parameters
     // /stats/v3/<cache_nonce>/a.png?n=<item_name>&i=<item_id>&u=<user_id>&s=<session_id>
@@ -156,8 +140,6 @@ async fn main() {
         .and_then(stats_v4_handler);
 
     let routes = info
-        .or(stats_v1)
-        .or(stats_v2)
         .or(stats_v3)
         .or(stats_v4);
 
@@ -187,67 +169,6 @@ fn get_default_config_file(filename: &str) -> Result<PathBuf, String> {
                 .map(|p| p.to_path_buf().join(filename))
                 .ok_or("Could not find parent directory of this executable".to_string())
         )
-}
-
-async fn stats_v1_handler(
-    item_name: String, item_id: String, user_id: String, session_id: String, _world_id: String,
-    cache_nonce: String, db: Db,
-) -> Result<Box<dyn warp::Reply>, warp::Rejection> {
-    let timestamp = Utc::now();
-    let item_name = &percent_encoding::percent_decode_str(&item_name).decode_utf8_lossy();
-    let item_id = &percent_encoding::percent_decode_str(&item_id).decode_utf8_lossy();
-    let user_id = &percent_encoding::percent_decode_str(&user_id).decode_utf8_lossy();
-    let session_id = &percent_encoding::percent_decode_str(&session_id).decode_utf8_lossy();
-    let cache_nonce = &percent_encoding::percent_decode_str(&cache_nonce).decode_utf8_lossy();
-    let protocol_version = 1;
-
-    println!(
-        "[{}] Got v1 statistics: {} {} {} {} {}",
-        timestamp.to_rfc3339_opts(SecondsFormat::Millis, true),
-        item_name,
-        item_id,
-        user_id,
-        session_id,
-        cache_nonce,
-    );
-
-    Ok(
-        statistics_result_to_response(
-            record_statistics_v1(
-                db, Some(item_name), Some(item_id), Some(user_id),
-                Some(session_id), timestamp, protocol_version, cache_nonce,
-            ).await
-        )
-    )
-}
-
-async fn stats_v2_handler(
-    item_name: String, item_id: String, user_id: String, cache_nonce: String, db: Db,
-) -> Result<Box<dyn warp::Reply>, warp::Rejection> {
-    let timestamp = Utc::now();
-    let item_name = &percent_encoding::percent_decode_str(&item_name).decode_utf8_lossy();
-    let item_id = &percent_encoding::percent_decode_str(&item_id).decode_utf8_lossy();
-    let user_id = &percent_encoding::percent_decode_str(&user_id).decode_utf8_lossy();
-    let cache_nonce = &percent_encoding::percent_decode_str(&cache_nonce).decode_utf8_lossy();
-    let protocol_version = 2;
-
-    println!(
-        "[{}] Got v2 statistics: {} {} {} {}",
-        timestamp.to_rfc3339_opts(SecondsFormat::Millis, true),
-        item_name,
-        item_id,
-        user_id,
-        cache_nonce,
-    );
-
-    Ok(
-        statistics_result_to_response(
-            record_statistics_v1(
-                db, Some(item_name), Some(item_id), Some(user_id),
-                None, timestamp, protocol_version, cache_nonce,
-            ).await
-        )
-    )
 }
 
 async fn stats_v3_handler(
