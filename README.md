@@ -5,7 +5,7 @@ This is the backend of a usage statistics system for Neos VR.
 ## How it works
 
 1. A tracked item is spawned in-game
-2. Logix on the item gathers various data (spawning user, item name, item version, etc) and generates a URL for a [tracking pixel](https://en.wikipedia.org/wiki/Web_beacon)
+2. Logix on the item gathers various data (item name, item version, etc) and generates a URL for a [tracking pixel](https://en.wikipedia.org/wiki/Web_beacon)
 3. The tracking pixel is loaded, sending a request to the statistics-collector server
 4. The statistics-collector server logs the request to a PostgreSQL database
 
@@ -15,7 +15,6 @@ This is the backend of a usage statistics system for Neos VR.
 | timestamp             | Time the item was spawned | core usage statistics data |
 | item_name             | Slot name of the spawned item | core usage statistics data |
 | item_id               | Internal id of the item (intended to stay static even if the slot name changes) | core usage statistics data |
-| user_id               | Neos user id of whoever spawned the item | core usage statistics data |
 | neos_version          | Neos client version of whoever spawned the item | Tracking Neos bugs that affect statistics collection |
 | session_id            | Neos session id the item was spawned into | removing spam caused by leaving my items in worlds |
 | world_url             | Neos world url the item was spawned into | removing spam caused by leaving my items in worlds |
@@ -53,6 +52,9 @@ BullFody | 0.07246376811594202899
 Things that surprised me:
 - People use my stupid meme advertisments way more than I expected
 - People use my performance graph way less than I expected :(
+
+## Changelog
+[Full changelog here](doc/changelog.md)
 
 ## Frequently Asked Questions
 
