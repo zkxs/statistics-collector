@@ -18,7 +18,6 @@ This is the backend of a usage statistics system for Neos VR.
 | neos_version          | Neos client version of whoever spawned the item | Tracking Neos bugs that affect statistics collection |
 | session_id            | Neos session id the item was spawned into | removing spam caused by leaving my items in worlds |
 | world_url             | Neos world url the item was spawned into | removing spam caused by leaving my items in worlds |
-| protocol_version      | statistics-collector API version | tracking when I can remove support for old API endpoints |
 | client_major_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
 | client_minor_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
 | cache_nonce           | Used for cache busting. | Recorded for debugging reasons |
