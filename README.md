@@ -65,8 +65,11 @@ That's not a question, but sorry I guess? You realize that pretty much anything 
 ### Isn't this abusing an exploit?
 No. As per Frooxius in [Neos Issue #883](https://github.com/Neos-Metaverse/NeosPublic/issues/883) this is not a bug: it is working as intended. Also, this behavior has been known for *more than a year*, so it's not as if I'm sneaking this in before the ramifications have had time to be fully understood.
 
-### Isn't this against Neos's privacy policy?
+### Is this against Neos's privacy policy?
 No. [Neos's Privacy Policy](https://wiki.neos.com/Neos_Wiki:Privacy_policy#Community_Content) shrugs community content privacy issues off onto the content creators. So here's a [generic copy/pasted privacy policy](privacy_policy.html) for this application. Enjoy.
+
+### Is this against Neos's guidelines?
+No. As of 2021-11-27 [Neos's guidelines](https://docs.google.com/document/d/1G_-PaxSp8rGYeHUIXK-19b2VqOLlpOZ18e7DrOwNjG4/edit) only restrict tracking users. This application tracks items, not users, and is therefore not covered.
 
 ### Could this be used to join hidden sessions?
 No. The current version does not collect session IDs.
