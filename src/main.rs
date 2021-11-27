@@ -178,7 +178,7 @@ async fn stats_v3_handler(
     let item_name = query_params.n.as_ref().map(String::as_str);
     let item_id = query_params.i.as_ref().map(String::as_str);
     let user_id = None; // under the 2021-11-11 guidelines tracking users without consent is not allowed. Disabled pending client updates.
-    let session_id = query_params.s.as_ref().map(String::as_str);
+    let session_id = None; // under guidelines clarification received on 2021-11-27 "session statistics" cannot be tracked without consent.
     let cache_nonce = &percent_encoding::percent_decode_str(&cache_nonce).decode_utf8_lossy();
     let protocol_version = 3;
 
@@ -209,7 +209,7 @@ async fn stats_v4_handler(
     let item_name = query_params.n.as_ref().map(String::as_str);
     let item_id = query_params.i.as_ref().map(String::as_str);
     let user_id = None; // under the 2021-11-11 guidelines tracking users without consent is not allowed. Disabled pending client updates.
-    let session_id = query_params.s.as_ref().map(String::as_str);
+    let session_id = None; // under guidelines clarification received on 2021-11-27 "session statistics" cannot be tracked without consent.
     let world_url = query_params.w.as_ref().map(String::as_str);
     let neos_version = query_params.v.as_ref().map(String::as_str);
     let cache_nonce = &percent_encoding::percent_decode_str(&cache_nonce).decode_utf8_lossy();

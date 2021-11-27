@@ -16,11 +16,10 @@ This is the backend of a usage statistics system for Neos VR.
 | item_name             | Slot name of the spawned item | core usage statistics data |
 | item_id               | Internal id of the item (intended to stay static even if the slot name changes) | core usage statistics data |
 | neos_version          | Neos client version of whoever spawned the item | Tracking Neos bugs that affect statistics collection |
-| session_id            | Neos session id the item was spawned into | removing spam caused by leaving my items in worlds |
 | world_url             | Neos world url the item was spawned into | removing spam caused by leaving my items in worlds |
 | client_major_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
 | client_minor_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
-| cache_nonce           | Used for cache busting. | Recorded for debugging reasons |
+| cache_nonce           | Used for cache busting | Not recorded |
 
 ## The output
 After filtering out various types of bad data, these are the results that I actually look at:
@@ -61,7 +60,7 @@ Things that surprised me:
 I'm `runtime` in-game. [`U-runtime`](https://api.neos.com/api/users/U-runtime) if you need my user id. I make tools and stuff. If you want to talk to me about this hit me up in-game, on discord, via email, whatever.
 
 ### Why are you doing this?
-I recieve almost no in-game feedback about my creations. The idea is that by gathering usage statistics for the various tools I maintain I can better direct my efforts towards the tools people are actually using.
+I receive almost no in-game feedback about my creations. The idea is that by gathering usage statistics for the various tools I maintain I can better direct my efforts towards the tools people are actually using.
 
 ### This makes me uncomfortable
 That's not a question, but sorry I guess? You realize that pretty much anything you touch on the internet is going to have some form of usage statistics?
@@ -73,11 +72,4 @@ No. As per Frooxius in [Neos Issue #883](https://github.com/Neos-Metaverse/NeosP
 No. [Neos's Privacy Policy](https://wiki.neos.com/Neos_Wiki:Privacy_policy#Community_Content) shrugs community content privacy issues off onto the content creators. So here's a [generic copy/pasted privacy policy](privacy_policy.html) for this application. Enjoy.
 
 ### Could this be used to join hidden sessions?
-Yes, as long as the joiner meets the other requirments. You can't bypass Contacts+/Contacts/Private just becuase you have the session ID. If you need *real* security and not just [security by obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity) don't use the the Anyone or Registered User access levels.
-
-### Are you using this to join hidden sessions?
-No. Why would I want to do that? I don't enjoy being around people who don't want me there, so sneaking into sessions uninvited would be a colossal waste of my time.
-
-If someone *does* join your hidden session they'll show up in your Neos logs. Neos does not delete old logs so you can go read your *entire* log history to see if someone's been sneaking around. If someone is entering your hidden sessions and harrasing you I suggest you open a [moderation ticket](https://moderation.neos.com/).
-
-Finally, if you encounter somone who claims runtime is joining hidden sessions uninvited, please ask them to provide proof. I guarantee they will be unable to. I would love it if people stop slandering me.
+No. The current version does not collect session IDs.

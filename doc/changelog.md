@@ -1,6 +1,11 @@
 # Changelog
 
 ## 2021-11-15
+This change disables `session_id` tracking.
+
+Under guidelines clarification received on 2021-11-27 "session statistics" cannot be tracked without consent.
+
+## 2021-11-15
 This change disables `user_id` tracking. All other fields are still being tracked.
 
 This change has been made due to a Neos Guidelines change. The [2021-11-11 guidelines](https://docs.google.com/document/d/1G_-PaxSp8rGYeHUIXK-19b2VqOLlpOZ18e7DrOwNjG4/edit)
