@@ -10,46 +10,43 @@ This is the backend of a usage statistics system for Neos VR.
 4. The statistics-collector server logs the request to a PostgreSQL database
 
 ## What data is collected
-| field                 | description | why it's collected |
-| --------------------- | ----------- | ------------------ |
-| timestamp             | Time the item was spawned | core usage statistics data |
-| item_name             | Slot name of the spawned item | core usage statistics data |
-| item_id               | Internal id of the item (intended to stay static even if the slot name changes) | core usage statistics data |
+| Field                 | Description | Why it is Collected |
+| --------------------- | ----------- | ------------------- |
+| timestamp             | Time the item was spawned | Core usage statistics data |
+| item_name             | Slot name of the spawned item | Core usage statistics data |
+| item_id               | Internal id of the item (intended to stay static even if the slot name changes) | Core usage statistics data |
 | neos_version          | Neos client version of whoever spawned the item | Tracking Neos bugs that affect statistics collection |
-| world_url             | Neos world url the item was spawned into | removing spam caused by leaving my items in worlds |
-| client_major_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
-| client_minor_version  | statistics LogiX version | tracking rollout of bugfixes in the client LogiX |
-| cache_nonce           | Used for cache busting | Not recorded |
+| world_url             | Neos world url the item was spawned into | Removing spam caused by saving my items in worlds |
+| client_major_version  | Statistics client LogiX version | Tracking rollout of bugfixes in the client LogiX |
+| client_minor_version  | Statistics client LogiX version | Tracking rollout of bugfixes in the client LogiX |
+| cache_nonce           | Random number | Not recorded; used for cache busting |
 
 ## The output
-After filtering out various types of bad data, these are the results that I actually look at:
+After filtering out various types of bad data, the results of the statistics collector are usage percentage of my items over a rolling two-week window. Actual output from 2021-11-27:
 
-item | usage percent
---- | ---
-EyeFinder | 15.5072463768115942
-adDragon | 15.3623188405797101
-ASMR Brush | 14.7101449275362319
-ad2dGirl | 14.7101449275362319
-ad3dGirl | 14.3478260869565217
-Colliderless Gun | 7.9710144927536232
-👺Tip | 2.8985507246376812
-MathGun | 2.7536231884057971
-The chosen perspective | 2.7536231884057971
-BootySetterTip | 2.3913043478260870
-Feetus Deletus | 2.3188405797101449
-YeetTip | 1.1594202898550725
-Shitty Laser Pointer | 0.86956521739130434783
-Colliderizer | 0.65217391304347826087
-Hammer of Deactivation | 0.43478260869565217391
-ColliderFlashTip | 0.36231884057971014493
-AllocatingUserTip | 0.36231884057971014493
-Performance Graph | 0.21739130434782608696
-PersistentSetterTip | 0.14492753623188405797
-BullFody | 0.07246376811594202899
+item | uses | usage percent
+---|---|---
+EyeFinder | 332 | 47.8386167146974063
+adDragon | 132 | 19.0201729106628242
+YeetTip | 62 | 8.9337175792507205
+ASMR Brush | 33 | 4.7550432276657061
+BootySetterTip | 26 | 3.7463976945244957
+Colliderless Gun | 25 | 3.6023054755043228
+👺Tip | 23 | 3.3141210374639769
+Feetus Deletus | 23 | 3.3141210374639769
+MathGun | 22 | 3.1700288184438040
+Performance Graph | 7 | 1.0086455331412104
+The chosen perspective | 3 | 0.43227665706051873199
+Shitty Laser Pointer | 2 | 0.28818443804034582133
+AllocatingUserTip | 1 | 0.14409221902017291066
+ColliderFlashTip | 1 | 0.14409221902017291066
+ad2dGirl | 1 | 0.14409221902017291066
+Hammer of Deactivation | 1 | 0.14409221902017291066
 
 Things that surprised me:
-- People use my stupid meme advertisments way more than I expected
-- People use my performance graph way less than I expected :(
+- People use my performance graph way less than I expected. Probably not worth working on my planned improvements if no one's using it.
+- People use my stupid meme advertisements way more than I expected. At least it was a high-effort shitpost.
+- EyeFinder took about 10 minutes to make and is my most-used item, easily beating items I spent hours of dev time on.
 
 ## Changelog
 [Full changelog here](doc/changelog.md)
@@ -63,7 +60,7 @@ I'm `runtime` in-game. [`U-runtime`](https://api.neos.com/api/users/U-runtime) i
 I receive almost no in-game feedback about my creations. The idea is that by gathering usage statistics for the various tools I maintain I can better direct my efforts towards the tools people are actually using.
 
 ### This makes me uncomfortable
-That's not a question, but sorry I guess? You realize that pretty much anything you touch on the internet is going to have some form of usage statistics?
+That's not a question, but sorry I guess? You realize that pretty much anything you touch on the internet is going to have some form of usage statistics? As far as statistics go "item X was spawned at Y time" is pretty light.
 
 ### Isn't this abusing an exploit?
 No. As per Frooxius in [Neos Issue #883](https://github.com/Neos-Metaverse/NeosPublic/issues/883) this is not a bug: it is working as intended. Also, this behavior has been known for *more than a year*, so it's not as if I'm sneaking this in before the ramifications have had time to be fully understood.
